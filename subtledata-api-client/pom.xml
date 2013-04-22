@@ -104,45 +104,52 @@
 					<target>1.6</target>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.scala-tools</groupId>
-				<artifactId>maven-scala-plugin</artifactId>
-				<version>2.15.2</version>
-				<executions>
-					<execution>
-						<id>scala-compile-first</id>
-						<phase>process-resources</phase>
-						<goals>
-							<goal>add-source</goal>
-							<goal>compile</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>scala-test-compile</id>
-						<phase>process-test-resources</phase>
-						<goals>
-							<goal>testCompile</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<jvmArgs>
-						<jvmArg>-Xms128m</jvmArg>
-						<jvmArg>-Xmx1500m</jvmArg>
-					</jvmArgs>
-				</configuration>
-			</plugin>
+      <plugin>
+        <groupId>net.alchim31.maven</groupId>
+        <artifactId>scala-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>compile</goal>
+              <goal>testCompile</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <configuration>
+            <recompileMode>incremental</recompileMode>
+          </configuration>
+          <jvmArgs>
+            <jvmArg>-Xmx384m</jvmArg>
+          </jvmArgs>
+          <args>
+            <arg>-target:jvm-1.5</arg>
+            <arg>-deprecation</arg>
+          </args>
+          <launchers>
+            <launcher>
+              <id>run-scalatest</id>
+              <mainClass>org.scalatest.tools.Runner</mainClass>
+              <args>
+                <arg>-p</arg>
+                <arg>${project.build.testOutputDirectory}</arg>
+              </args>
+              <jvmArgs>
+                <jvmArg>-Xmx512m</jvmArg>
+              </jvmArgs>
+            </launcher>
+          </launchers>
+        </configuration>
+      </plugin>
 		</plugins>
 	</build>
 	<reporting>
 		<plugins>
-			<plugin>
-				<groupId>org.scala-tools</groupId>
-				<artifactId>maven-scala-plugin</artifactId>
-				<configuration>
-					<scalaVersion>${scala-version}</scalaVersion>
-				</configuration>
-			</plugin>
+      <plugin>
+        <groupId>net.alchim31.maven</groupId>
+        <artifactId>scala-maven-plugin</artifactId>
+        <version>${scala-maven-plugin-version}</version>
+      </plugin>
 		</plugins>
 	</reporting>
 	<dependencies>
@@ -152,17 +159,31 @@
       <version>${jersey-version}</version>
       <scope>compile</scope>
     </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>${jackson-version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-annotations</artifactId>
+      <version>${jackson-version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${jackson-version}</version>
+      <scope>compile</scope>
+    </dependency>
+
+		<!-- test dependencies -->
 	  <dependency>
 		  <groupId>org.scala-lang</groupId>
 		  <artifactId>scala-library</artifactId>
 		  <version>${scala-version}</version>
-		  <scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.wordnik</groupId>
-			<artifactId>swagger-core_2.9.1</artifactId>
-			<version>${swagger-core-version}</version>
-			<scope>compile</scope>
+		  <scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.scalatest</groupId>
@@ -180,11 +201,10 @@
 
 	<properties>
     <jersey-version>1.7</jersey-version>
-    <swagger-core-version>1.1.0</swagger-core-version>
+    <jackson-version>2.1.4</jackson-version>
 		<scala-version>2.9.1-1</scala-version>
 		<junit-version>4.8.1</junit-version>
-		<maven-plugin.version>1.0.0</maven-plugin.version>
-		<scala-test-version>1.6.1</scala-test-version>
+		<maven-plugin-version>1.0.0</maven-plugin-version>
 		<junit-version>4.8.1</junit-version>
 		<scala-test-version>1.6.1</scala-test-version>
 	</properties>
