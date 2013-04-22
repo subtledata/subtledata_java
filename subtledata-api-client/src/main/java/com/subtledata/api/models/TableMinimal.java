@@ -1,11 +1,8 @@
 package com.subtledata.api.models;
 
-import java.util.*;
-import com.subtledata.api.models.OpenTicket;
-public class Table {
+public class TableMinimal {
   /* Table Identifier */
   private Integer pos_table_id = null;
-  private List<OpenTicket> open_tickets = new ArrayList<OpenTicket>();
   /* Table ID */
   private Integer subtledata_id = null;
   /* Revenue Center ID */
@@ -17,13 +14,6 @@ public class Table {
   }
   public void setPos_table_id(Integer pos_table_id) {
     this.pos_table_id = pos_table_id;
-  }
-
-  public List<OpenTicket> getOpen_tickets() {
-    return open_tickets;
-  }
-  public void setOpen_tickets(List<OpenTicket> open_tickets) {
-    this.open_tickets = open_tickets;
   }
 
   public Integer getSubtledata_id() {
@@ -50,9 +40,8 @@ public class Table {
   @Override
   public String toString()  {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Table {\n");
+    sb.append("class TableMinimal {\n");
     sb.append("  pos_table_id: ").append(pos_table_id).append("\n");
-    sb.append("  open_tickets: ").append(open_tickets).append("\n");
     sb.append("  subtledata_id: ").append(subtledata_id).append("\n");
     sb.append("  revenue_center_id: ").append(revenue_center_id).append("\n");
     sb.append("  name: ").append(name).append("\n");

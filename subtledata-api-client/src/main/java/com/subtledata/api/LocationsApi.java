@@ -3,7 +3,9 @@ package com.subtledata.api;
 import com.subtledata.client.ApiException;
 import com.subtledata.client.ApiInvoker;
 import com.subtledata.api.models.Category;
+import com.subtledata.api.models.TableDetails;
 import com.subtledata.api.models.ConnectStatus;
+import com.subtledata.api.models.TableMinimal;
 import com.subtledata.api.models.PaymentStatus;
 import com.subtledata.api.models.User;
 import com.subtledata.api.models.ItemToAdd;
@@ -16,7 +18,6 @@ import com.subtledata.api.models.Status;
 import com.subtledata.api.models.ExternalPaymentStatus;
 import com.subtledata.api.models.NewPayment;
 import com.subtledata.api.models.Employee;
-import com.subtledata.api.models.Table;
 import com.subtledata.api.models.TicketStatus;
 import com.subtledata.api.models.Ticket;
 import com.subtledata.api.models.NewConnection;
@@ -211,7 +212,7 @@ public class LocationsApi {
       }
     }
   }
-  public List<Table> getTableList (Integer location_id, String api_key) throws ApiException {
+  public List<TableMinimal> getTableList (Integer location_id, String api_key, Boolean use_cache) throws ApiException {
     // create path and map variables
     String path = "/locations/{location_id}/tables".replaceAll("\\{format\\}","json").replaceAll("\\{" + "location_id" + "\\}", apiInvoker.escapeString(location_id.toString()));
 
@@ -225,10 +226,12 @@ public class LocationsApi {
     }
     if(!"null".equals(String.valueOf(api_key)))
       queryParams.put("api_key", String.valueOf(api_key));
+    if(!"null".equals(String.valueOf(use_cache)))
+      queryParams.put("use_cache", String.valueOf(use_cache));
     try {
       String response = apiInvoker.invokeAPI(basePath, path, "GET", queryParams, null, headerParams);
       if(response != null){
-        return (List<Table>) ApiInvoker.deserialize(response, "List", Table.class);
+        return (List<TableMinimal>) ApiInvoker.deserialize(response, "List", TableMinimal.class);
       }
       else {
         return null;
@@ -306,7 +309,7 @@ public class LocationsApi {
       }
     }
   }
-  public Table getTable (Integer location_id, Integer table_id, String api_key) throws ApiException {
+  public TableDetails getTable (Integer location_id, Integer table_id, String api_key) throws ApiException {
     // create path and map variables
     String path = "/locations/{location_id}/tables/{table_id}".replaceAll("\\{format\\}","json").replaceAll("\\{" + "location_id" + "\\}", apiInvoker.escapeString(location_id.toString())).replaceAll("\\{" + "table_id" + "\\}", apiInvoker.escapeString(table_id.toString()));
 
@@ -323,7 +326,7 @@ public class LocationsApi {
     try {
       String response = apiInvoker.invokeAPI(basePath, path, "GET", queryParams, null, headerParams);
       if(response != null){
-        return (Table) ApiInvoker.deserialize(response, "", Table.class);
+        return (TableDetails) ApiInvoker.deserialize(response, "", TableDetails.class);
       }
       else {
         return null;
