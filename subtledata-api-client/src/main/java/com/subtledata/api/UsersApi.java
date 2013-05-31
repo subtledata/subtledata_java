@@ -10,6 +10,7 @@ import com.subtledata.api.models.Status;
 import com.subtledata.api.models.NewCard;
 import com.subtledata.api.models.NewUser;
 import com.subtledata.api.models.DeleteUserStatus;
+import com.subtledata.api.models.NewUserDetails;
 import com.subtledata.api.models.AuthUserRequest;
 import java.util.*;
 
@@ -29,7 +30,7 @@ public class UsersApi {
     return basePath;
   }
 
-  public User createUser (String api_key, NewUser body) throws ApiException {
+  public NewUser createUser (String api_key, NewUserDetails body) throws ApiException {
     // create path and map variables
     String path = "/users".replaceAll("\\{format\\}","json");
 
@@ -46,7 +47,7 @@ public class UsersApi {
     try {
       String response = apiInvoker.invokeAPI(basePath, path, "POST", queryParams, body, headerParams);
       if(response != null){
-        return (User) ApiInvoker.deserialize(response, "", User.class);
+        return (NewUser) ApiInvoker.deserialize(response, "", NewUser.class);
       }
       else {
         return null;
@@ -155,7 +156,7 @@ public class UsersApi {
       }
     }
   }
-  public List<User> searchUsersByName (String user_name, String api_key, Boolean use_cache) throws ApiException {
+  public User searchUsersByName (String user_name, String api_key, Boolean use_cache) throws ApiException {
     // create path and map variables
     String path = "/users/search/name/{user_name}".replaceAll("\\{format\\}","json").replaceAll("\\{" + "user_name" + "\\}", apiInvoker.escapeString(user_name.toString()));
 
@@ -174,7 +175,7 @@ public class UsersApi {
     try {
       String response = apiInvoker.invokeAPI(basePath, path, "GET", queryParams, null, headerParams);
       if(response != null){
-        return (List<User>) ApiInvoker.deserialize(response, "List", User.class);
+        return (User) ApiInvoker.deserialize(response, "", User.class);
       }
       else {
         return null;

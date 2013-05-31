@@ -20,7 +20,9 @@ import com.subtledata.api.models.NewPayment;
 import com.subtledata.api.models.Employee;
 import com.subtledata.api.models.TicketStatus;
 import com.subtledata.api.models.Ticket;
+import com.subtledata.api.models.Tab;
 import com.subtledata.api.models.NewConnection;
+import com.subtledata.api.models.MenuItem;
 import java.util.*;
 
 public class LocationsApi {
@@ -177,6 +179,39 @@ public class LocationsApi {
       }
     }
   }
+  public MenuItem getMenuItem (Integer location_id, Integer item_id, String api_key, Boolean use_cache) throws ApiException {
+    // create path and map variables
+    String path = "/locations/{location_id}/menu/items/{item_id}".replaceAll("\\{format\\}","json").replaceAll("\\{" + "location_id" + "\\}", apiInvoker.escapeString(location_id.toString())).replaceAll("\\{" + "item_id" + "\\}", apiInvoker.escapeString(item_id.toString()));
+
+    // query params
+    Map<String, String> queryParams = new HashMap<String, String>();
+    Map<String, String> headerParams = new HashMap<String, String>();
+
+    // verify required params are set
+    if(location_id == null || item_id == null || api_key == null ) {
+       throw new ApiException(400, "missing required params");
+    }
+    if(!"null".equals(String.valueOf(api_key)))
+      queryParams.put("api_key", String.valueOf(api_key));
+    if(!"null".equals(String.valueOf(use_cache)))
+      queryParams.put("use_cache", String.valueOf(use_cache));
+    try {
+      String response = apiInvoker.invokeAPI(basePath, path, "GET", queryParams, null, headerParams);
+      if(response != null){
+        return (MenuItem) ApiInvoker.deserialize(response, "", MenuItem.class);
+      }
+      else {
+        return null;
+      }
+    } catch (ApiException ex) {
+      if(ex.getCode() == 404) {
+      	return null;
+      }
+      else {
+        throw ex;
+      }
+    }
+  }
   public List<Employee> getLocationEmployees (Integer location_id, String api_key, Integer manager_id, Integer revenue_center_id) throws ApiException {
     // create path and map variables
     String path = "/locations/{location_id}/employees".replaceAll("\\{format\\}","json").replaceAll("\\{" + "location_id" + "\\}", apiInvoker.escapeString(location_id.toString()));
@@ -245,7 +280,7 @@ public class LocationsApi {
       }
     }
   }
-  public List<Ticket> getTickets (Integer location_id, String api_key) throws ApiException {
+  public List<Ticket> getTickets (Integer location_id, String api_key, Boolean condensed) throws ApiException {
     // create path and map variables
     String path = "/locations/{location_id}/tickets".replaceAll("\\{format\\}","json").replaceAll("\\{" + "location_id" + "\\}", apiInvoker.escapeString(location_id.toString()));
 
@@ -259,6 +294,8 @@ public class LocationsApi {
     }
     if(!"null".equals(String.valueOf(api_key)))
       queryParams.put("api_key", String.valueOf(api_key));
+    if(!"null".equals(String.valueOf(condensed)))
+      queryParams.put("condensed", String.valueOf(condensed));
     try {
       String response = apiInvoker.invokeAPI(basePath, path, "GET", queryParams, null, headerParams);
       if(response != null){
@@ -296,6 +333,37 @@ public class LocationsApi {
       String response = apiInvoker.invokeAPI(basePath, path, "POST", queryParams, body, headerParams);
       if(response != null){
         return (TicketStatus) ApiInvoker.deserialize(response, "", TicketStatus.class);
+      }
+      else {
+        return null;
+      }
+    } catch (ApiException ex) {
+      if(ex.getCode() == 404) {
+      	return null;
+      }
+      else {
+        throw ex;
+      }
+    }
+  }
+  public List<Tab> getTabs (Integer location_id, String api_key) throws ApiException {
+    // create path and map variables
+    String path = "/locations/{location_id}/tabs".replaceAll("\\{format\\}","json").replaceAll("\\{" + "location_id" + "\\}", apiInvoker.escapeString(location_id.toString()));
+
+    // query params
+    Map<String, String> queryParams = new HashMap<String, String>();
+    Map<String, String> headerParams = new HashMap<String, String>();
+
+    // verify required params are set
+    if(location_id == null || api_key == null ) {
+       throw new ApiException(400, "missing required params");
+    }
+    if(!"null".equals(String.valueOf(api_key)))
+      queryParams.put("api_key", String.valueOf(api_key));
+    try {
+      String response = apiInvoker.invokeAPI(basePath, path, "GET", queryParams, null, headerParams);
+      if(response != null){
+        return (List<Tab>) ApiInvoker.deserialize(response, "List", Tab.class);
       }
       else {
         return null;

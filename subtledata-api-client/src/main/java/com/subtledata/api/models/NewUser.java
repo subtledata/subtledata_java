@@ -1,102 +1,30 @@
 package com.subtledata.api.models;
 
 public class NewUser {
-  /*  */
-  private String first_name = null;
-  /*  */
-  private String last_name = null;
-  /*  */
-  private String middle_name = null;
-  /*  */
-  private String dob = null;
-  /*  */
-  private String email_address = null;
-  /*  */
-  private Float longitude = null;
-  /*  */
-  private String cell_phone = null;
-  /*  */
-  private Float latitude = null;
-  /*  */
-  private String password = null;
-  /*  */
-  private String user_name = null;
-  /*  */
-  private String device_id = null;
-  public String getFirst_name() {
-    return first_name;
+  /* Device Identifier */
+  private String user_guid = null;
+  /* User ID */
+  private Integer user_id = null;
+  /* Device Identifier */
+  private Integer device_id = null;
+  public String getUser_guid() {
+    return user_guid;
   }
-  public void setFirst_name(String first_name) {
-    this.first_name = first_name;
+  public void setUser_guid(String user_guid) {
+    this.user_guid = user_guid;
   }
 
-  public String getLast_name() {
-    return last_name;
+  public Integer getUser_id() {
+    return user_id;
   }
-  public void setLast_name(String last_name) {
-    this.last_name = last_name;
-  }
-
-  public String getMiddle_name() {
-    return middle_name;
-  }
-  public void setMiddle_name(String middle_name) {
-    this.middle_name = middle_name;
+  public void setUser_id(Integer user_id) {
+    this.user_id = user_id;
   }
 
-  public String getDob() {
-    return dob;
-  }
-  public void setDob(String dob) {
-    this.dob = dob;
-  }
-
-  public String getEmail_address() {
-    return email_address;
-  }
-  public void setEmail_address(String email_address) {
-    this.email_address = email_address;
-  }
-
-  public Float getLongitude() {
-    return longitude;
-  }
-  public void setLongitude(Float longitude) {
-    this.longitude = longitude;
-  }
-
-  public String getCell_phone() {
-    return cell_phone;
-  }
-  public void setCell_phone(String cell_phone) {
-    this.cell_phone = cell_phone;
-  }
-
-  public Float getLatitude() {
-    return latitude;
-  }
-  public void setLatitude(Float latitude) {
-    this.latitude = latitude;
-  }
-
-  public String getPassword() {
-    return password;
-  }
-  public void setPassword(String password) {
-    this.password = password;
-  }
-
-  public String getUser_name() {
-    return user_name;
-  }
-  public void setUser_name(String user_name) {
-    this.user_name = user_name;
-  }
-
-  public String getDevice_id() {
+  public Integer getDevice_id() {
     return device_id;
   }
-  public void setDevice_id(String device_id) {
+  public void setDevice_id(Integer device_id) {
     this.device_id = device_id;
   }
 
@@ -104,16 +32,8 @@ public class NewUser {
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class NewUser {\n");
-    sb.append("  first_name: ").append(first_name).append("\n");
-    sb.append("  last_name: ").append(last_name).append("\n");
-    sb.append("  middle_name: ").append(middle_name).append("\n");
-    sb.append("  dob: ").append(dob).append("\n");
-    sb.append("  email_address: ").append(email_address).append("\n");
-    sb.append("  longitude: ").append(longitude).append("\n");
-    sb.append("  cell_phone: ").append(cell_phone).append("\n");
-    sb.append("  latitude: ").append(latitude).append("\n");
-    sb.append("  password: ").append(password).append("\n");
-    sb.append("  user_name: ").append(user_name).append("\n");
+    sb.append("  user_guid: ").append(user_guid).append("\n");
+    sb.append("  user_id: ").append(user_id).append("\n");
     sb.append("  device_id: ").append(device_id).append("\n");
     sb.append("}\n");
     return sb.toString();

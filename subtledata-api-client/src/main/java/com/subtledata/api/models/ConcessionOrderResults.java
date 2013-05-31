@@ -1,14 +1,23 @@
 package com.subtledata.api.models;
 
-public class TicketStatus {
+public class ConcessionOrderResults {
+  /* Payment Success Flag */
+  private Boolean payment_success = null;
   /* Error */
   private String error = null;
   /* New Ticket ID */
   private Integer ticket_id = null;
-  /* Call was successful */
+  /* Call success status */
   private Boolean success = null;
   /* Result Status */
   private String result = null;
+  public Boolean getPayment_success() {
+    return payment_success;
+  }
+  public void setPayment_success(Boolean payment_success) {
+    this.payment_success = payment_success;
+  }
+
   public String getError() {
     return error;
   }
@@ -40,7 +49,8 @@ public class TicketStatus {
   @Override
   public String toString()  {
     StringBuilder sb = new StringBuilder();
-    sb.append("class TicketStatus {\n");
+    sb.append("class ConcessionOrderResults {\n");
+    sb.append("  payment_success: ").append(payment_success).append("\n");
     sb.append("  error: ").append(error).append("\n");
     sb.append("  ticket_id: ").append(ticket_id).append("\n");
     sb.append("  success: ").append(success).append("\n");

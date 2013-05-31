@@ -1,10 +1,13 @@
 package com.subtledata.api.models;
 
+import java.util.*;
+import com.subtledata.api.models.Modifier;
 public class ItemToAdd {
   /* Item ID to order */
   private Integer item_id = null;
   /* Additional Order Instructions */
   private String instructions = null;
+  private List<Modifier> modifiers = new ArrayList<Modifier>();
   /* Item Quantity */
   private Integer quantity = null;
   public Integer getItem_id() {
@@ -21,6 +24,13 @@ public class ItemToAdd {
     this.instructions = instructions;
   }
 
+  public List<Modifier> getModifiers() {
+    return modifiers;
+  }
+  public void setModifiers(List<Modifier> modifiers) {
+    this.modifiers = modifiers;
+  }
+
   public Integer getQuantity() {
     return quantity;
   }
@@ -34,6 +44,7 @@ public class ItemToAdd {
     sb.append("class ItemToAdd {\n");
     sb.append("  item_id: ").append(item_id).append("\n");
     sb.append("  instructions: ").append(instructions).append("\n");
+    sb.append("  modifiers: ").append(modifiers).append("\n");
     sb.append("  quantity: ").append(quantity).append("\n");
     sb.append("}\n");
     return sb.toString();

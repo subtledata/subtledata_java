@@ -1,10 +1,10 @@
 package com.subtledata.api.models;
 
 import java.util.*;
-import com.subtledata.api.models.Item;
+import com.subtledata.api.models.MenuItemDetail;
 import com.subtledata.api.models.CategoryImage;
 public class Category {
-  private List<Item> items = new ArrayList<Item>();
+  private List<MenuItemDetail> items = new ArrayList<MenuItemDetail>();
   /* Category has items */
   private Boolean has_items = null;
   /* Instructional Text */
@@ -16,10 +16,10 @@ public class Category {
   private Boolean has_subcategories = null;
   /* Category Name */
   private String category_name = null;
-  public List<Item> getItems() {
+  public List<MenuItemDetail> getItems() {
     return items;
   }
-  public void setItems(List<Item> items) {
+  public void setItems(List<MenuItemDetail> items) {
     this.items = items;
   }
 
